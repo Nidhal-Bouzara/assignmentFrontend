@@ -1,27 +1,29 @@
-import React from 'react';
-import Modal from './Modal';
-import Recipes from '../Recipes';
-import Settings from '../Settings';
-import ModalContainer from '../../containers/Modal';
-import ModalTypes from '../../constants/ModalTypes';
-import SettingTypes from '../../constants/SettingTypes';
+import React from "react";
+import Modal from "./Modal";
+import Recipes from "../Recipes";
+import Settings from "../Settings";
+import ModalContainer from "../../containers/Modal";
+import ModalTypes from "../../constants/ModalTypes";
+import SettingTypes from "../../constants/SettingTypes";
 
 const MODAL_TITLES = {
-  [ModalTypes.RECIPES]: 'Recipes',
-  [SettingTypes.SETTINGS_MAIN]: 'Settings',
-  [SettingTypes.SETTINGS_DESCRIPTION]: 'Description',
-  [SettingTypes.PDF]: 'PDF',
-  [SettingTypes.DELETE]: 'DELETE',
+  [ModalTypes.RECIPES]: "Recipes",
+  [SettingTypes.SETTINGS_MAIN]: "Settings",
+  [SettingTypes.SETTINGS_DESCRIPTION]: "Description",
+  [SettingTypes.PDF]: "PDF",
+  [SettingTypes.DELETE]: "DELETE",
 };
 
 const Modals = React.memo(() => {
   const modal = ModalContainer.useContainer();
 
   let ChilderComponent = null;
-  let title = MODAL_TITLES[modal.type] || '';
+  let title = MODAL_TITLES[modal.type] || "";
+  let size = "small";
 
   if (modal.is(ModalTypes.RECIPES)) {
     ChilderComponent = Recipes;
+    size = "large";
   } else if (modal.is(ModalTypes.SETTINGS)) {
     ChilderComponent = Settings;
     title = `Meal Plan ${MODAL_TITLES[modal.props.settingsType]}`;
@@ -35,8 +37,9 @@ const Modals = React.memo(() => {
       onRequestClose={modal.hide}
       isOpen={!!modal.type}
       title={title}
+      size={size}
     >
-      {ChilderComponent && <ChilderComponent {...modal.props} onClose={modal.hide}/>}
+      {ChilderComponent && <ChilderComponent {...modal.props} onClose={modal.hide} />}
     </Modal>
   );
 });

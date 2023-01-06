@@ -1,22 +1,17 @@
-import React from 'react';
-import ReactModal from 'react-modal';
-import { ReactComponent as CloseIcon } from 'remixicon/icons/System/close-line.svg';
-import {
-  ModalDialog,
-  ModalClose,
-  ModalHeader,
-  ModalTitle
-} from '../../components/Modal';
+import React from "react";
+import ReactModal from "react-modal";
+import { ReactComponent as CloseIcon } from "remixicon/icons/System/close-line.svg";
+import { ModalDialog, ModalClose, ModalHeader, ModalTitle } from "../../components/Modal";
 
 const style = {
   overlay: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     zIndex: 5000,
   },
   content: {
-    background: 'none',
+    background: "none",
     border: 0,
-    borderRadius: '6px',
+    borderRadius: "6px",
     padding: 0,
     left: 0,
     right: 0,
@@ -25,18 +20,14 @@ const style = {
   },
 };
 
-const Modal = React.memo(({ title, Footer, children, ...props }) => {
+const Modal = React.memo(({ title, Footer, children, size, ...props }) => {
   return (
-    <ReactModal
-      {...props}
-      ariaHideApp={false}
-      style={style}
-    >
-      <ModalDialog>
+    <ReactModal {...props} ariaHideApp={false} style={style}>
+      <ModalDialog size={size}>
         <ModalHeader sticky="true">
           <ModalTitle>{title}</ModalTitle>
           <ModalClose type="button" onClick={props.onRequestClose}>
-            <CloseIcon/>
+            <CloseIcon />
           </ModalClose>
         </ModalHeader>
         {children}
