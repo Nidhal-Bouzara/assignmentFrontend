@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import media from '../utils/media';
-import { IconButton, VerticalDivider } from './UI';
+import { FlatButton, IconButton, VerticalDivider } from './UI';
 
 export const DishCaption = styled.div`
   flex: 1;
@@ -31,9 +31,10 @@ export const DishImageBox = styled.div`
   ${media.desktop`
     flex: initial;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    overflow: hidden;
   `}
 `;
 
@@ -41,8 +42,8 @@ export const DishImage = styled.img`
   display: block;
   object-fit: cover;
   border-radius: 4px;
-  width: 74px;
-  height: 74px;
+  width: 100%;
+  height: 100%;
   min-height: 74px;
   position: relative;
 
@@ -88,6 +89,20 @@ export const DishActions = styled.div`
   }
 `;
 
+export const DishDeleteButton = styled(FlatButton)`
+  background-color: #f5365c;
+  color: #fff;
+  border: none;
+  min-height: 32px;
+  z-index: 555;
+  position: relative;
+
+  &:hover {
+    background-color: #DD1144;
+    color: #fff;
+  }
+`
+
 export const DishPopover = styled.div`
   backface-visibility: hidden;
   position: absolute;
@@ -102,7 +117,7 @@ export const DishPopover = styled.div`
   transition-timing-function: ease-in-out;
   pointer-events: none;
   opacity: 0;
-  transform: translateY(calc(-100% + 10px)) scale(.75);
+  transform: translateY(calc(-100% + 110px)) scale(.75);
   transform-origin: 20px calc(100% + 12px);
   color: #fff;
   padding: 8px;
@@ -156,8 +171,8 @@ export const Dish = styled.div`
   ${media.desktop`
     align-items: center;
     justify-content: center;
-    width: 84px;
-    height: 84px;
+    width: 164px;
+    height: 124px;
     max-width: 100%;
     padding: 0;
     margin-bottom: 16px;

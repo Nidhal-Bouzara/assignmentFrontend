@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 // import Button
 import { Badge, Button } from "./UI";
+import media from "../utils/media";
 
 export const RecipesContainer = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ export const RecipeItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 25%
+  width: 50%;
   padding: 8px 0;
   position: relative;
 
@@ -23,13 +24,13 @@ export const RecipeItem = styled.div`
     border-top: 1px solid #f2f6fa;
   }
 
-  @media (max-width: 768px) {
+  ${media.tablet`
     width: 33%;
-  }
+  `}
 
-  @media (max-width: 576px) {
-    width: 50%;
-  }
+  ${media.desktop`
+    width: 25%;
+  `}
 `;
 
 export const RecipeActions = styled.div`
@@ -82,7 +83,7 @@ export const RecipeImage = styled.div`
   height: 44px;
   overflow: hidden;
   width: 90%;
-  height: 250px;
+  height: 220px;
   border-radius: 10px;
 
   // gradient overlay

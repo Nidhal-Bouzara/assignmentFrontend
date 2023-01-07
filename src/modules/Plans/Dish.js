@@ -4,8 +4,9 @@ import { DragSource, DropTarget } from "react-dnd";
 import flow from "lodash/flow";
 import * as ItemTypes from "../../constants/ItemTypes";
 import { ReactComponent as NotificationIcon } from "remixicon/icons/Media/notification-2-fill.svg";
-import { Dish, DishCaption, DishImageBox, DishImage, DishActions, DishPopover, DishOverlay } from "../../components/Dish";
-import { IconButton, VerticalDivider } from "../../components/UI";
+import { ReactComponent as BinDeleteIcon } from "remixicon/icons/System/delete-bin-fill.svg";
+import { Dish, DishCaption, DishImageBox, DishImage, DishActions, DishPopover, DishOverlay, DishDeleteButton } from "../../components/Dish";
+import { FlatButton, IconButton, VerticalDivider } from "../../components/UI";
 import thumbnail from "../../assets/meal_thumbnail.png";
 
 class Card extends Component {
@@ -38,7 +39,9 @@ class Card extends Component {
           <span>{dish.totals.kcal} kcals</span>
         </DishCaption>
         <DishActions>
-          <span onClick={() => {alert("delete")}}>Delete</span>
+
+          <DishDeleteButton onClick={() => {alert("delete")}}><BinDeleteIcon fill="white"/>&nbsp;Remove</DishDeleteButton>
+          {/* <span onClick={() => {alert("delete")}}>Delete</span> */}
         </DishActions>
         <DishPopover hidden={isDragging}>{dish.totals.kcal} kcals: {dish.name} (#{dish.order})</DishPopover>
       </Dish>

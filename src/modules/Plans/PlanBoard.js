@@ -13,16 +13,16 @@ const PlanBoard = React.memo(({ planId }) => {
     <Board>
       {meals.map(meal => 
         <Meal 
-          id={meal.id}
-          meal={meal} 
-          planId={planId}
-          save={container.save}
-          pushDish={container.pushDish}
-          removeDish={container.removeDish}
-          moveDish={container.moveDish}
-          key={`meal_${meal.id}`}
+        id={meal.id}
+        meal={meal} 
+        planId={planId}
+        save={container.save}
+        pushDish={container.pushDish}
+        removeDish={container.removeDish}
+        moveDish={container.moveDish}
+        key={`meal_${meal.id}`}
         />
-      )}
+        )}
     </Board>
   );
 });

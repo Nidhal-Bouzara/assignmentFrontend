@@ -96,7 +96,7 @@ export const BoardItems = styled.div`
 
   ${media.desktop`
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 16px 16px 26px;
     margin: 0;
     width: 100%;
