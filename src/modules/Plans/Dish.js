@@ -8,14 +8,19 @@ import { ReactComponent as BinDeleteIcon } from "remixicon/icons/System/delete-b
 import { Dish, DishCaption, DishImageBox, DishImage, DishActions, DishPopover, DishOverlay, DishDeleteButton } from "../../components/Dish";
 import { FlatButton, IconButton, VerticalDivider } from "../../components/UI";
 import thumbnail from "../../assets/meal_thumbnail.png";
+import { connect } from "react-redux";
+import { moveDish, removeDish } from "../../store/mealPlans.slice";
 
 class Card extends Component {
   render() {
     const {
       dish,
+      index,
+      mealId,
       isDragging,
       connectDragSource,
-      connectDropTarget
+      connectDropTarget,
+      removeDish
     } = this.props;
 
     const opacity = isDragging ? 0 : 1;
@@ -40,7 +45,7 @@ class Card extends Component {
         </DishCaption>
         <DishActions>
 
-          <DishDeleteButton onClick={() => {alert("delete")}}><BinDeleteIcon fill="white"/>&nbsp;Remove</DishDeleteButton>
+          <DishDeleteButton onClick={() => {removeDish(mealId, index)}}><BinDeleteIcon fill="white"/>&nbsp;Remove</DishDeleteButton>
           {/* <span onClick={() => {alert("delete")}}>Delete</span> */}
         </DishActions>
         <DishPopover hidden={isDragging}>{dish.totals.kcal} kcals: {dish.name} (#{dish.order})</DishPopover>
@@ -72,6 +77,7 @@ const cardSource = {
     const dropResult = monitor.getDropResult();
 
     if (dropResult && dropResult.mealId !== item.mealId) {
+      
       props.removeDish(props.mealId, item.index);
     }
   }
@@ -128,7 +134,12 @@ const cardTarget = {
   }
 };
 
-export default flow(
+const mapDispatchToProps = dispatch => ({
+  removeDish: (mealId, index) => dispatch(removeDish({mealId, index})),
+  moveDish: (mealId, dragIndex, hoverIndex) => dispatch(moveDish({mealId, dragIndex, hoverIndex}))
+});
+
+export default connect(undefined, mapDispatchToProps)(flow(
   DropTarget(ItemTypes.CARD, cardTarget, connect => ({
     connectDropTarget: connect.dropTarget()
   })),
@@ -136,4 +147,4 @@ export default flow(
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
   }))
-)(Card);
+)(Card));

@@ -36,7 +36,7 @@ const Recipes = React.memo(({ meal }) => {
     <ModalBody>
       <RecipesContainer>
         {data.map((recipe) => (
-          <Recipe {...recipe} key={`recipe_${recipe.id}`} selected={existing.includes(recipe.id)} />
+          <Recipe {...recipe} key={`recipe_${recipe.id}`} mealId={meal.id}/>
         ))}
       </RecipesContainer>
     </ModalBody>

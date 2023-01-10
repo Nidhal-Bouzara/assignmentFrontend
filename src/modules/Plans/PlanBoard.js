@@ -1,14 +1,14 @@
 import React from "react";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
-import MealPlansContainer from "../../containers/MealPlans";
-import Meal from "./Meal";
+import { useSelector } from "react-redux";
 import { Board } from "../../components/Board";
+import Meal from "./Meal";
 
-const PlanBoard = React.memo(({ planId }) => {
-  const container = MealPlansContainer.useContainer();
-  const meals = container.mealsByPlan(planId);
-
+const PlanBoard = React.memo(({ planId, stata }) => {
+  const meals = useSelector(state => {
+    return Object.values(state.mealPlans.meals).filter(meal => meal.planId === planId)
+  })
   return (
     <Board>
       {meals.map(meal => 
@@ -16,10 +16,6 @@ const PlanBoard = React.memo(({ planId }) => {
         id={meal.id}
         meal={meal} 
         planId={planId}
-        save={container.save}
-        pushDish={container.pushDish}
-        removeDish={container.removeDish}
-        moveDish={container.moveDish}
         key={`meal_${meal.id}`}
         />
         )}

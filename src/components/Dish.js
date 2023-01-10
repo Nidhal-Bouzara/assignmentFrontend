@@ -42,12 +42,14 @@ export const DishImage = styled.img`
   display: block;
   object-fit: cover;
   border-radius: 4px;
-  width: 100%;
-  height: 100%;
+  width: 74px;
+  height: 74px;
   min-height: 74px;
   position: relative;
-
+  
   ${media.desktop`
+  width: 100%;
+  height: 100%;
     border-radius: 2px;
   `}
 `;
@@ -94,8 +96,8 @@ export const DishDeleteButton = styled(FlatButton)`
   color: #fff;
   border: none;
   min-height: 32px;
-  z-index: 555;
   position: relative;
+  z-index: 755;
 
   &:hover {
     background-color: #DD1144;
@@ -232,7 +234,8 @@ export const DishOverlay = styled.div`
   align-items: center;
   justify-content: center;
   color: #fff;
-  z-index: 200;
+  z-index: 100;
+  pointer-events: none;
 
   span {
     display: block;

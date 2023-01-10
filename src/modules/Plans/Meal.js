@@ -16,13 +16,15 @@ import {
   BoardItems
 } from "../../components/Board";
 import * as ItemTypes from "../../constants/ItemTypes";
+import { connect } from "react-redux";
+import { pushDish, save } from "../../store/mealPlans.slice";
 
 const macroSplitOptions = Object.keys(MacroSplitTypes).map(value => ({
   value: parseInt(value, 10),
   label: MacroSplitTypes[value],
 }));
 
-const Meal = React.memo(({ meal, planId, canDrop, isOver, connectDropTarget, removeDish, moveDish }) => {
+const Meal = React.memo(({ meal, planId, canDrop, isOver, connectDropTarget }) => {
   const { show: modalShow } = ModalContainer.useContainer();
   const [macroSplit, setMacroSplit] = useState(2);
 
@@ -69,8 +71,6 @@ const Meal = React.memo(({ meal, planId, canDrop, isOver, connectDropTarget, rem
               index={index}
               mealId={meal.id}
               planId={planId}
-              removeDish={removeDish}
-              moveDish={moveDish}
               key={`dish_${dish.id}`}
               showRecipes={modalShow.bind(null, ModalTypes.RECIPES, { meal, dish })}
             />
@@ -107,8 +107,13 @@ const cardTarget = {
   }
 };
 
-export default DropTarget(ItemTypes.CARD, cardTarget, (connect, monitor) => ({
+const mapDispatchToProps = (dispatch) => ({
+  pushDish: (mealId, dish, index) => dispatch(pushDish({mealId, dish, index})),
+  save: () => dispatch(save()),
+})
+
+export default connect(undefined, mapDispatchToProps)(DropTarget(ItemTypes.CARD, cardTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop()
-}))(Meal);
+}))(Meal));

@@ -12,6 +12,14 @@ export type LOCALE_TYPE =
   | "nl_NL";
 
 
+// interface for average totals
+export interface IAvgTotals {
+  kcal: number;
+  protein: number;
+  carbohydrate: number;
+  fat: number;
+}
+
 export interface IMeal {
   id: number;
   name: string;
@@ -122,11 +130,27 @@ export interface IMeal {
   };
   percent_weight: number;
   last: boolean;
-  avg_totals: {
-    kcal: number;
-    protein: number;
-    carbohydrate: number;
-    fat: number;
-  };
+  avg_totals: IAvgTotals
   planId: number;
+}
+
+
+
+export interface IMealPlan {
+  active: boolean;
+  avg_totals: IAvgTotals;
+  client: number;
+  client_name: string;
+  created: string;
+  desired_kcals: number;
+  macro_split: number;
+  meals_fit_kcals: boolean;
+  user: string;
+  id: number;
+  name: string;
+  explanation: string;
+  last_updated: string;
+  locale: LOCALE_TYPE;
+  meal_plans: IMeal[];
+  contains_alternatives: boolean;
 }
