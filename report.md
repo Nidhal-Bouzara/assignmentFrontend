@@ -41,3 +41,5 @@ I think the optimal approach is to consider these three things:
 2. Any maintancance or additions done to existing code is a good oppurtunity to document and correctly type the component/class/funciton/file/whatever
 3. Tasks and time should occassionally be set aside during low-pressure periods to strictly focus on documentation and typescript typing of the project.
 It was difficult working with javascript again after being used to typescript, and the difference is very noticeable when I switch between the two and get no IDE intelliSense.
+
+P.S: Please excuse any typos, I wrote this quickly and without proofreading.
